@@ -1,4 +1,6 @@
 *** Settings ***
+Library           OperatingSystem
+
 Resource        ../Helpers/Helpers.robot
 
 *** Variables ***
@@ -42,8 +44,17 @@ Select ${value} from ${group} radio button group
     [Documentation]     Select a radio button from the specified group.
     Click Element        xpath=//input[@name="${group}" and @value=${value}]
 
+Drag ${item} to ${folder}
+    [Documentation]     Drag an item from one location to another location.
+    Assign Id To Element        ${item}     project1id
+    Assign Id To Element        ${folder}       folder2id
+
+    ${jQuery}=      Get File        ./Libs/jquery_load_helper.js
+    Execute Async Javascript        ${jQuery}
+
+    ${js}=      Get File        ./Libs/drag_and_drop_helper.js
+    Execute Javascript      ${js} $('#project1id').simulateDragDrop({ dropTarget: '#folder2id'});
+
 Validate that ${field} contains ${value}
     [Documentation]     Validate that the text entered in the element is what is expected.
     Element Text Should Be      ${field}        ${value}
-
-# Drag drop functionality.

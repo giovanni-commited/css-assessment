@@ -6,6 +6,7 @@ Resource        ${CURDIR}/../Engine/Common.robot
 Resource        ${CURDIR}/../ObjectRepository/HomePage.robot
 Resource        ${CURDIR}/../ObjectRepository/SignIn.robot
 Resource        ${CURDIR}/../ObjectRepository/SelectEnvironment.robot
+Resource        ${CURDIR}/../ObjectRepository/ProjectsOrganizer.robot
 
 Suite Setup     Set Up
 Suite Teardown  Clean Up
@@ -24,10 +25,16 @@ Drag Drop Item
 
     Login       ${username}     ${password}
     Select Environment      ${environment}
+    Drag Project From Folder To Folder      ${liFolder1}        ${liProject1}       ${liFolder2}
 
-    Sleep       5
-    # Drag drop.
     # Assertion.
+    Click ${liFolder2} element
+    Wait Until Element Is Visible       ${liProject1}      15
+    Page Should Contain Element     ${liProject1}
+    Page Should Contain Element     ${liProject2}
+
+    # Added wait so that changes can be viewed.
+    Sleep       5
 
 Login
     [Arguments]     ${username}     ${password}
@@ -41,3 +48,13 @@ Select Environment
     Click ${cmbEnvironment} element
     Click ${liAwsQA} element
     Click ${btnLaunch} button
+
+Drag Project From Folder To Folder
+    [Arguments]     ${folder1}      ${project}      ${folder2}
+    Wait Until Element Is Visible       ${btnAddFolder}     15
+    Wait Until Element Is Visible       ${folder1}      15
+    Click ${folder1} element
+    Wait Until Element Is Visible       ${project}      15
+    Drag ${project} to ${folder2}
+    Click ${btnYes} button
+    
