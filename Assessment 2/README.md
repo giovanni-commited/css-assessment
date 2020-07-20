@@ -5,6 +5,7 @@
      https://stackoverflow.com/questions/42083431/how-to-change-reports-or-output-saving-location-in-robot-framework-from-ride
      https://sites.google.com/a/chromium.org/chromedriver/home
      https://robotframework-thailand.github.io/robotframework-jsonlibrary/JSONLibrary.html
+     https://stackoverflow.com/questions/29381233/how-to-simulate-html5-drag-and-drop-in-selenium-webdriver
  
 ### Installs ###
      pip install --upgrade robotframework-seleniumlibrary
